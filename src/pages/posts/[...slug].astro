@@ -1,0 +1,29 @@
+---
+import { getCollection } from "astro:content";
+import RootLayout from "@/layouts/root-layout.astro";
+import PublishedDate from "@/components/published-date.astro";
+import Prose from "@/components/prose.astro";
+
+export async function getStaticPaths() {
+  const blogEntries = await getCollection("posts");
+  return blogEntries.map((entry) => ({
+    params: { slug: entry.slug },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await entry.render();
+---
+
+<RootLayout>
+  <div>
+    <h1 class="font-semibold">{entry.data.title}</h1>
+    <PublishedDate date={entry.data.pubDate} class="mt-1 text-secondary" />
+  </div>
+  <div class="mt-8">
+    <Prose>
+      <Content />
+    </Prose>
+  </div>
+</RootLayout>

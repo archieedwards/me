@@ -3,7 +3,8 @@
 @tailwind utilities;
 
 @layer base {
-  span {
+  span,
+  a {
     display: inline-block;
   }
 }

@@ -1,14 +1,38 @@
 ---
+import { getCollection } from "astro:content";
 import RootLayout from "@/layouts/root-layout.astro";
+import PublishedDate from "@/components/published-date.astro";
+
+const posts = await getCollection("posts");
+const sortedPosts = posts.sort((a, b) => {
+  return new Date(b.data.pubDate) - new Date(a.data.pubDate);
+});
 ---
 
 <RootLayout>
-  <h1 class="font-semibold">Archie Edwards</h1>
-  <p class="mt-1 text-secondary">
-    Product Engineer driving habit formation at <a
-      href="https://veed.io"
-      target="_blank"
-      class="rounded-md text-accent-500 hover:underline">Veed.io</a
-    >
-  </p>
+  <div>
+    <h1 class="font-semibold">Archie Edwards</h1>
+    <p class="mt-1 text-secondary">
+      Product Engineer driving habit formation at <a
+        href="https://veed.io"
+        target="_blank"
+        class="rounded-md text-accent-500 hover:underline">Veed.io</a
+      >
+    </p>
+  </div>
+  <div class="mt-8">
+    <h2 class="font-semibold">Posts</h2>
+    <ul class="mt-1 space-y-1">
+      {
+        sortedPosts.map((post) => (
+          <li class="flex">
+            <PublishedDate date={post.data.pubDate} class="text-secondary" />
+            <a href={`/posts/${post.slug}`} class="ml-4 hover:underline">
+              {post.data.title}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
 </RootLayout>
