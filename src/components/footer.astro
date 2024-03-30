@@ -1,0 +1,35 @@
+---
+const socialLinks = [
+  {
+    name: "X",
+    url: "https://twitter.com/archieedwds",
+  },
+  {
+    name: "Github",
+    url: "https://github.com/archieedwards",
+  },
+  {
+    name: "Email",
+    url: "mailto:hello@archieedwards.com",
+  },
+];
+---
+
+<footer class="border-t border-gray-200 pt-4">
+  <p class="font-medium">Links</p>
+  <ul class="mt-1 flex flex-col space-y-1 font-medium text-gray-500">
+    {
+      socialLinks.map((link) => (
+        <li>
+          <a
+            href={link.url}
+            target="_blank"
+            class="transition-colors ease-in-out hover:text-gray-900 hover:underline"
+          >
+            {link.name}
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</footer>
