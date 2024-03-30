@@ -2,6 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  span {
+    display: inline-block;
+  }
+}
+
 @layer utilities {
   .h-screen {
     height: 100dvh;
