@@ -1,11 +1,11 @@
 ---
 import { getCollection } from "astro:content";
 import RootLayout from "@/layouts/root-layout.astro";
-import PublishedDate from "@/components/published-date.astro";
+import FormattedDate from "@/components/formatted-date.astro";
 
 const posts = await getCollection("posts");
 const sortedPosts = posts.sort((a, b) => {
-  return new Date(b.data.pubDate) - new Date(a.data.pubDate);
+  return a.data.pubDate.valueOf() - b.data.pubDate.valueOf();
 });
 ---
 
@@ -26,8 +26,8 @@ const sortedPosts = posts.sort((a, b) => {
       {
         sortedPosts.map((post) => (
           <li class="flex">
-            <PublishedDate date={post.data.pubDate} class="text-secondary" />
-            <a href={`/posts/${post.slug}`} class="ml-4 hover:underline">
+            <FormattedDate date={post.data.pubDate} class="text-secondary" />
+            <a href={`/posts/${post.slug}/`} class="ml-4 hover:underline">
               {post.data.title}
             </a>
           </li>

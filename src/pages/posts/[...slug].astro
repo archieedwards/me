@@ -1,7 +1,7 @@
 ---
 import { getCollection } from "astro:content";
 import RootLayout from "@/layouts/root-layout.astro";
-import PublishedDate from "@/components/published-date.astro";
+import FormattedDate from "@/components/formatted-date.astro";
 import Prose from "@/components/prose.astro";
 
 export async function getStaticPaths() {
@@ -19,7 +19,7 @@ const { Content } = await entry.render();
 <RootLayout>
   <div>
     <h1 class="font-semibold">{entry.data.title}</h1>
-    <PublishedDate date={entry.data.pubDate} class="mt-1 text-secondary" />
+    <FormattedDate date={entry.data.pubDate} class="mt-1 text-secondary" />
   </div>
   <div class="mt-8">
     <Prose>
