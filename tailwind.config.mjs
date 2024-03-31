@@ -11,7 +11,7 @@ export default {
         border: colors.stone[200],
         primary: colors.stone[900],
         secondary: colors.stone[500],
-        background: colors.stone[100],
+        background: colors.stone[50],
         accent: colors.orange,
       },
     },

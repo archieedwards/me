@@ -13,13 +13,22 @@ export async function getStaticPaths() {
 }
 
 const { entry } = Astro.props;
-const { Content } = await entry.render();
+const { Content, remarkPluginFrontmatter } = await entry.render();
 ---
 
 <RootLayout>
-  <div>
+  <a
+    href="/"
+    class="text-secondary transition-colors ease-in-out hover:text-primary"
+    >← All posts</a
+  >
+  <div class="mt-4">
     <h1 class="font-semibold">{entry.data.title}</h1>
-    <FormattedDate date={entry.data.pubDate} class="mt-1 text-secondary" />
+    <div class="mt-1 flex space-x-1 text-secondary">
+      <FormattedDate date={entry.data.pubDate} />
+      <span>•</span>
+      <span>{remarkPluginFrontmatter.minutesRead}</span>
+    </div>
   </div>
   <div class="mt-8">
     <Prose>
